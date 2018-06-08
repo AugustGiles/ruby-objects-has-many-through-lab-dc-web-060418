@@ -22,13 +22,15 @@ class Artist
   end
 
   def songs
-    Song.all
+    Song.all.select do |song|
+      song.artist == self
+    end
   end
 
   def genres
-    Song.all.collect do |song|
+    self.songs.collect do |song|
       song.genre
-    end
+    end.uniq
   end
 
 end
